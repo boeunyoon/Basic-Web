@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 8080
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { auth } = require("./middleware/auth");
@@ -16,7 +16,11 @@ mongoose.connect('mongodb+srv://yboeun:dbsqhdms00@cluster0.9ocle.mongodb.net/bas
 }).then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err))
 app.get('/', (req, res) => {
-  res.send('Hello World! HI')
+  res.send('Hello World! HELLO')
+})
+
+app.get('/api/hello', (req,res) => {
+  res.send("안녕하세요")
 })
 app.post('/api/users/register', (req, res) => {
   //회원가입시 필요한 정보들을 client에서 가져오면 그것들을 데이터베이스에 저장한다
