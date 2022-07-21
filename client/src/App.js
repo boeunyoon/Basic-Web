@@ -1,10 +1,13 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import LandinPage from "./components/views/LandingPage/LandingPage"
+import LandingPage from "./components/views/LandingPage/LandingPage"
 import LoginPage from "./components/views/LoginPage/LoginPage"
 import RegisterPage from "./components/views/RegisterPage/RegisterPage"
+import Auth from './hoc/auth'
+import React,{ Suspense } from 'react';
 function App() {
   return (
+    <Suspense fallback={(<div>Loading...</div>)}>
     <Router>
     <div>
       <ul>
@@ -22,12 +25,13 @@ function App() {
       <hr />
 
       <Routes>
-      <Route path="/register" element={<RegisterPage/>} />
-      <Route path="/login" element={<LoginPage/>} />
-      <Route path="/" element={<LandinPage/>} />
+      <Route path="/" element={Auth(LandingPage, null)} />
+      <Route path="/login" element={Auth(LoginPage, false)} />
+      <Route path="/register" element={Auth(RegisterPage, false)} />
     </Routes>
     </div>
   </Router>
+  </Suspense>
   );
 }
 
